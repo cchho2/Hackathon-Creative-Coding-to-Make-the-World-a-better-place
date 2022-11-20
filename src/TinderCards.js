@@ -1,20 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TinderCard from "react-tinder-card";
+import database from './firebase';
 import './TinderCards.css';
 
-
 function TinderCards() {
-  const [people, setPeople] = useState([
-    {
-        name: 'Zain is goofy',
-        url: 'https://www.freepnglogos.com/uploads/food-png/junk-food-archives-classic-0.png'
-    },
-    {
-        name: 'Hamid is goofy',
-        url: 'https://www.freepnglogos.com/uploads/food-png/food-grass-fed-beef-foodservice-products-grass-run-farms-4.png'
-    }
-  ]) ; 
-  //const people = [];
+  const [people, setPeople] = useState([]) ; 
+
+    
+ //Piece of code which runs based on a condition
+ useEffect(() => {
+    //this is where the code runs
+        database.collection("Food").onSnapshot((snapshot) =>
+        setPeople(snapshot.docs.map((doc) => doc.data()))
+    );
+    //Run once and never again
+ }, []);
+ 
+
+
     return (
     <div>
         <h1>Food Cards</h1>
@@ -39,5 +42,3 @@ function TinderCards() {
 }
 
 export default TinderCards;
-
-
