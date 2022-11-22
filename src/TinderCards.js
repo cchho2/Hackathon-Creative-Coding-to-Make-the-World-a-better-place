@@ -6,13 +6,19 @@ import './TinderCards.css';
 function TinderCards() {
   const [people, setPeople] = useState([]) ; 
 
+  
     
  //Piece of code which runs based on a condition
  useEffect(() => {
     //this is where the code runs
-        database.collection("Food").onSnapshot((snapshot) =>
+        const unsubscribe = database.collection("Food").onSnapshot((snapshot) =>
         setPeople(snapshot.docs.map((doc) => doc.data()))
     );
+
+    return () => {
+        //this is the cleanup...
+        unsubscribe();
+    };
     //Run once and never again
  }, []);
  
@@ -20,8 +26,6 @@ function TinderCards() {
 
     return (
     <div>
-        <h1>Food Cards</h1>
-
         <div className="tinderCards_cardContainer"></div>
         {people.map((person) => (
             <TinderCard
@@ -42,3 +46,5 @@ function TinderCards() {
 }
 
 export default TinderCards;
+
+
