@@ -1,6 +1,12 @@
 # Food-Swipe
 
+## What is it?
+__An app that connects people who are in need of food to those who have excess amounts of food that they are willing to donate instead of throwing it out.__
 
+## Collaborators
+- Eric Chhour
+- Zain Syed
+- Hamid Khorami
 
 
 
